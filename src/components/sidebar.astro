@@ -1,7 +1,28 @@
-<nav class="flex flex-col h-full p-6 text-black gap-4 text-sm font-md">
-    <h1 class="text-xl font-bold mb-4">Portfolio by mikio815</h1>
-    <a href="/" class="hover:underline">Home</a>
-    <a href="/about" class="hover:underline">About</a>
-    <a href="/works" class="hover:underline">Works</a>
-    <a href="/contact" class="hover:underline">Contact</a>
+---
+import { Icon } from "astro-iconify";
+import GitHubIcon from "./icons/GithubIcon.astro";
+import TwitterIcon from "./icons/TwitterIcon.astro";
+---
+
+<nav class="flex flex-col justify-between h-full p-6 text-black text-sm font-medium">
+  <!-- 上部メニュー -->
+  <div>
+    <h1 class="text-xl font-bold mb-6">Portfolio by mikio815</h1>
+    <div class="flex flex-col gap-2">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <a href="/about" class="hover:text-blue-400">About</a>
+      <a href="/works" class="hover:text-blue-400">Works</a>
+      <a href="/contact" class="hover:text-blue-400">Contact</a>
+    </div>
+  </div>
+
+  <!-- 下部SNSアイコン -->
+  <div class="mt-8 flex gap-4">
+    <a href="https://github.com/mikio815" target="_blank" aria-label="GitHub">
+        <GitHubIcon className="w-6 h-6 text-white hover:text-blue-400 transition" />
+    </a>
+    <a href="https://twitter.com/mikio815" target="_blank" aria-label="Twitter">
+        <TwitterIcon className="w-6 h-6 text-white hover:text-blue-400 transition" />
+    </a>
+  </div>
 </nav>
