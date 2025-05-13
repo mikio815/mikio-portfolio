@@ -1,1 +1,54 @@
+/* src/styles/global.css */
 @import "tailwindcss";
+
+:root {
+  --font-sans: 'neue-haas-grotesk-display', system-ui, sans-serif;
+}
+
+html {
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+body {
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.writing-vertical-lr {
+  writing-mode: vertical-lr;
+}
+
+/* ナビゲーションリンクのスタイル */
+nav a {
+  transition-property: color;
+  transition-duration: 200ms;
+}
+
+nav a:hover {
+  color: rgb(59 130 246);
+}
+
+/* カスタムマージン */
+.ml-76 {
+  margin-left: 19rem; /* 左サイドバー(5rem) + ナビゲーション(14rem) */
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-in;
+}
+
+.futura {
+  font-family: "futura-pt", sans-serif;
+}
+
+.tussilago {
+  font-family: "tussilago", sans-serif;
+}
