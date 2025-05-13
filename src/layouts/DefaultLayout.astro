@@ -1,0 +1,26 @@
+---
+// src/layouts/DefaultLayout.astro
+import Sidebar from "../components/sidebar.astro"
+import "../styles/global.css"
+---
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mikio815</title>
+  </head>
+  <body class="m-0 p-0 text-gray-800 bg-white">
+    <div class="flex h-screen">
+      <!-- サイドバー -->
+      <aside class="w-60 fixed h-full z-10">
+        <Sidebar />
+      </aside>
+
+      <!-- メイン -->
+      <main class="ml-60 flex-1 overflow-y-auto p-10">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>
+
