@@ -2,17 +2,30 @@
 import DefaultLayout from "../layouts/DefaultLayout.astro"
 ---
 <DefaultLayout>
-	<section id="about" class="scroll-mt-24">
-        <h2 class="text-2xl font-bold mb-4">About</h2>
-        <p>ここに内容</p>
+	<section id="about" class="scroll-mt-24 mt-24">
+        <h2 class="text-6xl font-bold mb-6 tussilago ">About</h2>
+        <div class="flex flex-col sm:flex-row items-center gap-18 mt-12">
+            <img src="/icon.png" alt="うちの子の顔" class="w-64 h-64 rounded-lg">
+            <div>
+                <h2 class="futura font-bold text-7xl">mikio</h2>
+                <p class="futura font-md text-4xl mt-10 ">CTF(pwn, rev), Linux kernel, ...and more!</p>
+            </div>
+        </div>
+        <div class="mt-20 whitespace-pre-line text-">
+            <p>
+                ここら辺に何か追記事項を書く
+                あーーーーーーーーーーーーー  
+                筑波大学～～～～～～～～～～～～  
+                趣味とかね　パソコンのことも少し書く
+            </p>
+        </div>
     </section>
 
     <section id="career" class="scroll-mt-24 mt-20">
-        <h2 class="text-2xl font-bold mb-4">Career</h2>
+        <h2 class="text-6xl font-bold mb-6 tussilago">Career</h2>
         <ul>
-            <li>あ</li>
-            <li>い</li>
-            <li>う</li>
+            <li>2024.4 筑波大学情報学群情報科学類　入学</li>
+            <li>2028.3 同学　卒業（予定）</li>
         </ul>
     </section>
 </DefaultLayout>
