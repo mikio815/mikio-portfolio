@@ -1,6 +1,17 @@
 ---
 import DefaultLayout from "../layouts/DefaultLayout.astro"
+import { Icon } from "astro-icon/components";
 ---
 <DefaultLayout>
-	<h2 class="text-6xl font-bold mt-24">工事中です！</h2>
+	<div class="flex flex-col gap-y-6">
+		<h2 class="text-6xl font-bold mt-24 tussilago">Twitter</h2>
+		<a href="https://x.com/mikio815" class="flex items-center gap-x-4"><Icon name="mdi:twitter" class="text-8xl" /><span class="futura text-3xl hover:text-[#FF4081] transition-colors duration-200 ">@mikio815</span></a>
+		<a href="https://x.com/youalulu" class="flex items-center gap-x-4"><Icon name="mdi:twitter" class="text-8xl" /><span class="futura text-3xl hover:text-[#FF4081] transition-colors duration-200 ">@youalulu (illustration)</span></a>
+	</div>
+
+	<div class="flex flex-col gap-y-6">
+		<h2 class="text-6xl font-bold mt-24 tussilago">Github</h2>
+		<a href="https://github.com/mikio815" class="flex items-center gap-x-4"><Icon name="mdi:github" class="text-8xl" /><span class="futura text-3xl hover:text-[#FF4081] transition-colors duration-200 ">@mikio815</span></a>
+	</div>
+
 </DefaultLayout>
