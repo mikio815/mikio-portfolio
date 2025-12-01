@@ -1,8 +1,9 @@
 /* src/styles/global.css */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap");
 @import "tailwindcss";
 
 :root {
-  --font-sans: 'neue-haas-grotesk-display', system-ui, sans-serif;
+	--font-sans: 'Noto Sans JP', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', 'neue-haas-grotesk-display', system-ui, sans-serif;
 }
 
 html {
@@ -50,5 +51,132 @@ nav a:hover {
 }
 
 .tussilago {
-  font-family: "tussilago", sans-serif;
+	font-family: "tussilago", sans-serif;
+}
+
+.heading-jp {
+	font-family: var(--font-sans);
+	font-weight: 700;
+	letter-spacing: 0.02em;
+}
+
+.post-content {
+	font-family: var(--font-sans);
+	font-size: 1.05rem;
+	line-height: 1.9;
+	color: #1f2933;
+}
+
+.post-content > * + * {
+	margin-top: 1.2rem;
+}
+
+.post-content h2,
+.post-content h3,
+.post-content h4 {
+	font-family: var(--font-sans);
+	color: #111827;
+	letter-spacing: 0.02em;
+	margin-top: 2.4rem;
+	margin-bottom: 0.8rem;
+}
+
+.post-content h2 {
+	font-size: 2rem;
+}
+
+.post-content h3 {
+	font-size: 1.5rem;
+}
+
+.post-content h4 {
+	font-size: 1.3rem;
+}
+
+.post-content p {
+	margin: 0;
+}
+
+.post-content strong {
+	font-weight: 650;
+	color: #0f172a;
+}
+
+.post-content em {
+	font-style: italic;
+}
+
+.post-content a {
+	color: #2563eb;
+	text-decoration: none;
+	border-bottom: 1px solid rgba(37, 99, 235, 0.35);
+	transition: color 150ms ease, border-color 150ms ease;
+}
+
+.post-content a:hover {
+	color: #1d4ed8;
+	border-color: rgba(29, 78, 216, 0.6);
+}
+
+.post-content ul,
+.post-content ol {
+	padding-left: 1.4rem;
+	margin: 0;
+	list-style-position: outside;
+}
+
+.post-content ul {
+	list-style-type: disc;
+}
+
+.post-content ol {
+	list-style-type: decimal;
+}
+
+.post-content li + li {
+	margin-top: 0.4rem;
+}
+
+.post-content blockquote {
+	border-left: 4px solid rgba(15, 23, 42, 0.2);
+	padding-left: 1rem;
+	margin: 1.5rem 0;
+	font-style: italic;
+	color: #334155;
+}
+
+.post-content code {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+	background: rgba(15, 23, 42, 0.08);
+	padding: 0.1rem 0.35rem;
+	border-radius: 0.35rem;
+	font-size: 0.95em;
+}
+
+.post-content pre {
+	background: rgba(15, 23, 42, 0.85);
+	color: #e5e7eb;
+	padding: 1.2rem 1.5rem;
+	border-radius: 1rem;
+	overflow-x: auto;
+	font-size: 0.95rem;
+}
+
+.post-content pre code {
+	background: transparent;
+	padding: 0;
+	color: inherit;
+}
+
+.post-content hr {
+	border: none;
+	border-top: 1px solid rgba(15, 23, 42, 0.15);
+	margin: 2.5rem 0;
+}
+
+.post-content img {
+	border-radius: 1rem;
+	box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+	width: 100%;
+	height: auto;
 }

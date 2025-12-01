@@ -2,32 +2,31 @@
 import DefaultLayout from "../layouts/DefaultLayout.astro"
 ---
 <DefaultLayout>
-	<section id="about" class="scroll-mt-24 mt-24">
+	<section id="about" class="scroll-mt-24 mt-24 text-slate-900">
         <h2 class="text-6xl font-bold mb-6 tussilago ">About</h2>
         <div class="flex flex-col sm:flex-row items-center gap-18 mt-12">
-            <img src="/icon.png" alt="うちの子の顔" class="w-64 h-64 rounded-lg">
+            <img src="/icon.jpg" alt="うちの子の顔" class="w-64 h-64 rounded-lg">
             <div>
                 <h2 class="futura font-bold text-7xl">mikio</h2>
                 <p class="futura font-md text-4xl mt-10 ">CTF(pwn, rev), Linux kernel, ...and more!</p>
             </div>
         </div>
-        <div class="mt-20 whitespace-pre-line text-">
-            <p class="futura text-2xl font-light">
+        <div class="mt-20 space-y-4">
+            <p class="futura text-2xl font-light text-slate-600">
                 College of Infomation Science @Univ. of Tsukuba (2nd-year, 2025)
             </p>
-            <p class="font-light text-lg">
-                CTF(pwn, rev), kernel moduleなどに興味があります 
-                イラスト制作も長いこと続けています　→<a href="/social">social</link>
+            <p class="font-light text-lg leading-relaxed text-slate-600">
+                CTF(pwn, rev), kernelなどに興味があります。
+                イラスト制作も長いこと続けています　→<a href="/social" class="underline decoration-[#FF4081]/50 underline-offset-4 transition hover:text-[#FF4081]">social</a>
             </p>
         </div>
     </section>
 
-    <section id="career" class="scroll-mt-24 my-20">
+    <section id="career" class="scroll-mt-24 my-20 text-slate-900">
         <h2 class="text-6xl font-bold mb-10 tussilago">Career</h2>
-        <ul class="font-light text-lg">
-            <li>2024.4    筑波大学情報学群情報科学類　入学</li>
-            <li>2025.6    IERAE CTF 2025 1st place(as TPC)</li>
-            <li>2028.3    同学　卒業（予定）</li>
+        <ul class="font-light text-lg text-slate-600 space-y-2">
+            <li>2024.4　筑波大学情報学群情報科学類　入学</li>
+            <li>2028.3　同学　卒業（予定）</li>
         </ul>
     </section>
 </DefaultLayout>

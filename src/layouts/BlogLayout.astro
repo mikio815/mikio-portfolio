@@ -1,6 +1,17 @@
 ---
 import "../styles/global.css"
 const { frontmatter } = Astro.props;
+
+const formattedPubDate = new Date(frontmatter.pubDate).toLocaleDateString(
+	"ja-JP",
+	{
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	},
+)
+
+const tags = Array.isArray(frontmatter.tags) ? frontmatter.tags : []
 ---
 <html lang="ja">
 <head>
@@ -66,12 +77,36 @@ const { frontmatter } = Astro.props;
     </aside>
     
     <!-- メインコンテンツ -->
-    <main class="flex flex-col ml-56 mr-36 mt-24 overflow-y-auto">
-      <div class="flex items-center justify-between mb-12">
-        <h1 class="tussilago text-3xl">{frontmatter.title}</h1>
-        <p class="futura mr-12 text-xl">{frontmatter.pubDate}</p>
-      </div>
-      <slot />
+	    <main class="flex flex-col ml-56 mr-36 mt-24 overflow-y-auto pb-24">
+	      <section class="rounded-[32px] border border-white/20 bg-[#ECEFF1]/30 px-10 py-10 shadow-[0_12px_35px_rgba(0,0,0,0.05)] backdrop-blur">
+        <p class="mb-4 text-xs uppercase tracking-[0.6em] text-gray-400 futura">entry</p>
+        <div class="flex flex-wrap items-end justify-between gap-6">
+	          <div class="space-y-4">
+	            <h1 class="heading-jp text-3xl md:text-4xl leading-tight">{frontmatter.title}</h1>
+            {frontmatter.description && (
+              <p class="text-lg text-gray-600 leading-relaxed max-w-2xl">
+                {frontmatter.description}
+              </p>
+            )}
+          </div>
+          <div class="text-right">
+            <p class="futura text-xs uppercase tracking-[0.4em] text-gray-400 mb-1">published</p>
+            <p class="futura text-2xl">{formattedPubDate}</p>
+          </div>
+        </div>
+	        {tags.length > 0 && (
+	          <div class="mt-8 flex flex-wrap gap-3">
+	            {tags.map((tag) => (
+	              <span class="rounded-full border border-white/30 bg-white/10 px-4 py-1 text-[0.65rem] tracking-[0.3em] uppercase text-gray-600 futura" key={tag}>
+	                {tag}
+	              </span>
+	            ))}
+	          </div>
+	        )}
+      </section>
+	      <article class="post-content mt-12 rounded-[32px] border border-white/20 bg-[#ECEFF1]/25 px-10 py-12 shadow-[0_10px_35px_rgba(0,0,0,0.04)] backdrop-blur">
+        <slot />
+      </article>
     </main>
   </div>
 </body>
