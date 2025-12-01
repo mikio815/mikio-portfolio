@@ -42,7 +42,10 @@ const posts: PostListItem[] = Object.values(postModules)
 			new Date(a.frontmatter.pubDate).getTime(),
 	)
 ---
-<DefaultLayout>
+<DefaultLayout
+	title="Blog"
+	description="mikio815のポートフォリオ"
+>
 	<section class="mt-24 max-w-4xl space-y-6">
 		<header class="mb-10 space-y-4">
 			<p class="text-xs uppercase tracking-[0.5em] text-gray-400 futura">
