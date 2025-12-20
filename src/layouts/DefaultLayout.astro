@@ -1,7 +1,7 @@
 ---
-// src/layouts/DefaultLayout.astro
 import "../styles/global.css"
 import SocialLinks from "../components/SocialLinks.astro"
+import MobileMenu from "../components/MobileMenu.astro"
 
 const SITE = {
 	baseUrl: "https://mikio815.dev",
@@ -45,7 +45,25 @@ const resolvedOgImage = (() => {
 </head>
 <body class="m-0 p-0 text-gray-900 bg-[#ECEFF1]">
   <div class="flex flex-col min-h-screen lg:flex-row">
-    <aside class="w-full px-6 py-6 lg:w-80 xl:w-96 lg:px-8 lg:py-10 lg:h-screen lg:fixed lg:top-0 lg:left-0 lg:flex lg:flex-col lg:overflow-y-auto lg:bg-[#ECEFF1] lg:z-10">
+    <!-- モバイル用トップバー -->
+    <header class="flex items-center justify-between px-6 py-4 lg:hidden">
+      <h1 class="text-2xl font-bold tussilago">
+        <a href="/">mikio815.dev</a>
+      </h1>
+      <button
+        id="mobile-menu-button"
+        type="button"
+        class="inline-flex flex-col items-center justify-center gap-1.5 w-12 h-12 shrink-0 rounded-full border border-slate-300 bg-white shadow-md shadow-slate-300/60 ring-2 ring-white/70 active:scale-[0.97] transition"
+        aria-label="Open navigation"
+        aria-expanded="false"
+      >
+        <span class="block h-0.5 w-6 bg-slate-800"></span>
+        <span class="block h-0.5 w-6 bg-slate-800"></span>
+        <span class="block h-0.5 w-6 bg-slate-800"></span>
+      </button>
+    </header>
+
+    <aside class="hidden w-full px-6 py-6 lg:w-72 xl:w-80 lg:px-8 lg:py-10 lg:h-screen lg:fixed lg:top-0 lg:left-0 lg:flex lg:flex-col lg:overflow-y-auto lg:bg-[#ECEFF1] lg:z-10">
       <div class="flex flex-wrap items-center justify-between gap-4">
         <h1 class="text-2xl font-bold tussilago lg:text-3xl">
           <a href="/">mikio815.dev</a>
@@ -55,10 +73,10 @@ const resolvedOgImage = (() => {
       <nav class="mt-8 flex flex-col gap-12 text-black flex-1" aria-label="Primary">
         <div class="flex items-stretch gap-4">
           <span class="writing-vertical-lr text-sm font-normal futura lg:text-base text-black leading-none">Profile</span>
-          <span class="w-[1.5px] bg-slate-800/70"></span>
+          <span class="block self-stretch w-[1.5px] h-full bg-slate-800/70"></span>
           <ul class="space-y-3 text-lg font-medium futura lg:text-2xl lg:space-y-5">
             <li>
-              <a href="/profile#about" class="text-black transition-colors duration-200">About</a>
+              <a href="/profile" class="text-black transition-colors duration-200">About</a>
             </li>
             <li>
               <a href="/profile#career" class="text-black transition-colors duration-200">Career</a>
@@ -71,7 +89,7 @@ const resolvedOgImage = (() => {
 
         <div class="flex items-stretch gap-4">
           <span class="writing-vertical-lr text-sm font-normal futura lg:text-base text-black leading-none">Tech</span>
-          <span class="w-[1.5px] bg-slate-800/70"></span>
+          <span class="block self-stretch w-[1.5px] h-full bg-slate-800/70"></span>
           <ul class="space-y-3 text-lg font-medium futura lg:text-2xl lg:space-y-5">
             <li>
               <a href="/tech#skills" class="text-black transition-colors duration-200">Skills</a>
@@ -84,7 +102,7 @@ const resolvedOgImage = (() => {
 
         <div class="flex items-stretch gap-4">
           <span class="writing-vertical-lr text-sm font-normal futura lg:text-base text-black leading-none">Contact</span>
-          <span class="w-[1.5px] bg-slate-800/70"></span>
+          <span class="block self-stretch w-[1.5px] h-full bg-slate-800/70"></span>
           <ul class="space-y-3 text-lg font-medium futura lg:text-2xl lg:space-y-5">
             <li>
               <a href="/social" class="text-black transition-colors duration-200">Social</a>
@@ -97,10 +115,46 @@ const resolvedOgImage = (() => {
       </nav>
       <SocialLinks class="hidden lg:flex mt-10 lg:mt-auto" />
     </aside>
-    <div aria-hidden="true" class="hidden lg:block lg:w-80 xl:w-96 flex-shrink-0"></div>
-    <main class="flex-1 w-full px-6 py-10 lg:px-12 lg:py-16">
+    <div aria-hidden="true" class="hidden lg:block lg:w-72 xl:w-80 flex-shrink-0"></div>
+    <main class="flex-1 w-full px-6 py-10 lg:px-10 lg:py-14">
       <slot />
     </main>
   </div>
+
+  <MobileMenu />
+
+  <script is:inline>
+    const btn = document.getElementById("mobile-menu-button");
+    const closeBtn = document.getElementById("mobile-menu-close");
+    const overlay = document.getElementById("mobile-menu-overlay");
+    const openMenu = () => {
+      if (!overlay) return;
+      overlay.classList.remove("opacity-0", "pointer-events-none");
+      overlay.classList.add("opacity-100");
+      btn?.setAttribute("aria-expanded", "true");
+      document.body.classList.add("overflow-hidden");
+    };
+    const closeMenu = () => {
+      if (!overlay) return;
+      overlay.classList.add("pointer-events-none");
+      overlay.classList.remove("opacity-100");
+      overlay.classList.add("opacity-0");
+      btn?.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("overflow-hidden");
+    };
+    btn?.addEventListener("click", openMenu);
+    closeBtn?.addEventListener("click", closeMenu);
+    overlay?.addEventListener("click", (e) => {
+      const panel = overlay.querySelector("[data-mobile-menu-panel]");
+      if (e.target === overlay || e.target === overlay.querySelector("[data-mobile-menu-backdrop]")) {
+        closeMenu();
+      } else if (panel && !panel.contains(e.target)) {
+        closeMenu();
+      }
+    });
+    overlay?.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", closeMenu);
+    });
+  </script>
 </body>
 </html>

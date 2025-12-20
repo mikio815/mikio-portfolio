@@ -1,0 +1,58 @@
+---
+import SocialLinks from "./SocialLinks.astro"
+---
+<div
+  id="mobile-menu-overlay"
+  class="fixed inset-0 z-40 bg-black/40 backdrop-blur-[2px] opacity-0 pointer-events-none transition-opacity duration-200 lg:hidden"
+  aria-hidden="true"
+>
+  <div class="absolute inset-0" aria-hidden="true" data-mobile-menu-backdrop></div>
+  <div
+    class="absolute top-0 right-0 bottom-0 w-[72vw] max-w-[320px] bg-white shadow-2xl px-6 py-14 flex flex-col gap-12"
+    data-mobile-menu-panel
+  >
+    <div class="flex items-center justify-between">
+      <span class="text-xl font-bold tussilago">Menu</span>
+      <button
+        id="mobile-menu-close"
+        type="button"
+        class="relative flex h-12 w-12 items-center justify-center rounded-full hover:bg-slate-100 transition"
+        aria-label="Close navigation"
+      >
+        <span class="absolute block h-[2px] w-6 bg-slate-800 rotate-45"></span>
+        <span class="absolute block h-[2px] w-6 bg-slate-800 -rotate-45"></span>
+      </button>
+    </div>
+
+    <nav class="flex flex-col gap-12 text-slate-900 w-full max-w-[280px] mx-auto" aria-label="Mobile Primary">
+      <div class="grid w-full grid-cols-[100px_1fr] items-start gap-x-8">
+        <p class="col-span-1 text-right min-w-[100px] whitespace-nowrap text-sm font-semibold tracking-[0.24em] text-slate-700 uppercase futura leading-6">Profile</p>
+        <ul class="col-span-1 w-full space-y-4 text-[26px] font-normal futura leading-tight">
+          <li><a href="/profile" class="hover:text-[#FF4081] transition">About</a></li>
+          <li><a href="/profile#career" class="hover:text-[#FF4081] transition">Career</a></li>
+          <li><a href="/blog" class="hover:text-[#FF4081] transition">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="grid w-full grid-cols-[100px_1fr] items-start gap-x-8">
+        <p class="col-span-1 text-right min-w-[100px] whitespace-nowrap text-sm font-semibold tracking-[0.24em] text-slate-700 uppercase futura leading-6">Tech</p>
+        <ul class="col-span-1 w-full space-y-4 text-[26px] font-normal futura leading-tight">
+          <li><a href="/tech#skills" class="hover:text-[#FF4081] transition">Skills</a></li>
+          <li><a href="/tech#works" class="hover:text-[#FF4081] transition">Works</a></li>
+        </ul>
+      </div>
+
+      <div class="grid w-full grid-cols-[100px_1fr] items-start gap-x-8">
+        <p class="col-span-1 text-right min-w-[100px] whitespace-nowrap text-sm font-semibold tracking-[0.24em] text-slate-700 uppercase futura leading-6">Contact</p>
+        <ul class="col-span-1 w-full space-y-4 text-[26px] font-normal futura leading-tight">
+          <li><a href="/social" class="hover:text-[#FF4081] transition">Social</a></li>
+          <li><a href="/contact" class="hover:text-[#FF4081] transition">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="mt-auto">
+      <SocialLinks class="justify-start gap-4" />
+    </div>
+  </div>
+</div>
