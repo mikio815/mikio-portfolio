@@ -5,7 +5,7 @@ description: "Arduino Nanoを入力源とするLinux向けの自作ポインテ�
 pubDate: "2026-1-13"
 tags: ["情報科学特別演習", "Linux"]
 format: "pdf"
-file: "/works/jottoku-1.pdf"
+asset: "/works/jottoku-1.pdf"
 ---
 
 ## 概要
