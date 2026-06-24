@@ -1,9 +1,115 @@
 ---
 import DefaultLayout from "../layouts/DefaultLayout.astro"
+
+const skillGroups = [
+	{
+		label: "Security / CTF",
+		items: [
+			{ name: "pwntools", note: "pwnで使う" },
+			{ name: "Ghidra", note: "リバエン" },
+			{ name: "Burp Suite", note: "Web(たまに)" },
+		],
+	},
+	{
+		label: "Low-level",
+		items: [
+			{ name: "eBPF", note: "アンチチート用" },
+			{ name: "Linux Kernel", note: "いろいろ" },
+			{ name: "TEE, CC", note: "セキュリティ・キャンプでやっています"}
+		],
+	},
+	{
+		label: "Languages",
+		items: [
+			{ name: "Rust", note: "アンチチート用" },
+			{ name: "Python", note: "主にexploit" },
+			{ name: "TypeScript", note: "たまにフロント周り" },
+			{ name: "C", note: "pwn, カーネルいじり用" },
+		],
+	},
+	{
+		label: "3D",
+		items: [
+			{ name: "Blender", note: "モデリング" },
+		],
+	},
+]
+
+const profileLists = [
+	{
+		label: "できること",
+		items: [
+			{ text: "(アンチ)チートの設計", note: "今メインで実装しています　アーキテクチャなど詳しくは", link: { href: "https://github.com/mikio815/linux-anticheat", label: "こちら" } },
+			{ text: "Confidential Computing", note: "セキュリティ・キャンプで絶賛取組中です　今はRAを実機無しで試せないか試行錯誤しています" },
+			{ text: "CTFのpwn", note: "他のジャンルよりはできます" },
+			{ text: "webの脆弱性調査", note: "業務でやっています" },
+		],
+	},
+	{
+		label: "やってみたいこと",
+		items: [
+			{ text: "ML系のハイパーバイザー設計", note: "スパコン/GPUクラスタで使われているハイパーバイザーの設計に興味があります" },
+			{ text: "Windows/Hyper-VのExploit", note: "かなり気になっています" },
+			{ text: "LLLを理解したい", note: "暗号は何もわかりません" },
+			{ text: "ブロックチェーン", note: "勉強したいです" },
+		],
+	},
+	{
+		label: "できないこと",
+		items: [
+			{ text: "web開発", note: "exploitしかできません" },
+			{ text: "コンパイラ、言語仕様など", note: "よくわかっていません" },
+		],
+	},
+]
 ---
 <DefaultLayout
 	title="Skills"
 	description="mikio815のポートフォリオ"
 >
-	<h2 class="text-6xl font-bold mt-12">工事中です！</h2>
+	<section class="mt-12 max-w-3xl text-slate-900">
+		<header class="mb-12">
+			<h2 class="text-6xl font-bold tussilago">Skills</h2>
+		</header>
+		<p class="font-light text-lg leading-relaxed text-slate-600 mb-6">基本的にセキュリティが好きです。</p>
+		<div class="mb-16 space-y-10">
+			{profileLists.map((list) => (
+				<div>
+					<p class="mb-3 text-lg font-medium text-slate-900">{list.label}</p>
+					<ul class="list-disc space-y-4 pl-16 text-slate-600 marker:text-slate-400">
+						{list.items.map((item) => (
+							<li class="leading-relaxed">
+								<span class="block text-base text-slate-900">{item.text}</span>
+								{item.note && (
+									<span class="mt-0.5 block text-sm text-slate-500">
+										{item.note}
+										{item.link && (
+											<a href={item.link.href} class="text-slate-700 underline underline-offset-2 hover:text-slate-900">{item.link.label}</a>
+										)}
+									</span>
+								)}
+							</li>
+						))}
+					</ul>
+				</div>
+			))}
+		</div>
+		<ul class="divide-y divide-slate-300 border-y border-slate-300">
+			{skillGroups.map((group) => (
+				<li class="flex flex-col gap-3 py-6 sm:flex-row sm:gap-8">
+					<span class="shrink-0 pt-1 text-xs uppercase tracking-[0.2em] text-slate-500 futura sm:w-40">
+						{group.label}
+					</span>
+					<div class="flex-1 space-y-4">
+						{group.items.map((item) => (
+							<div class="flex flex-col gap-x-4 gap-y-0.5 sm:flex-row sm:items-baseline">
+								<span class="w-36 shrink-0 text-base font-medium text-slate-900">{item.name}</span>
+								<span class="text-sm leading-relaxed text-slate-500">{item.note}</span>
+							</div>
+						))}
+					</div>
+				</li>
+			))}
+		</ul>
+	</section>
 </DefaultLayout>

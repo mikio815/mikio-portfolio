@@ -1,0 +1,85 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - heading "mikio815.dev" [level=1] [ref=e5]:
+        - link "mikio815.dev" [ref=e6] [cursor=pointer]:
+          - /url: /
+      - navigation "Primary" [ref=e7]:
+        - generic [ref=e8]:
+          - generic [ref=e9]: Profile
+          - list [ref=e11]:
+            - listitem [ref=e12]:
+              - link "About" [ref=e13] [cursor=pointer]:
+                - /url: /profile
+            - listitem [ref=e14]:
+              - link "Career" [ref=e15] [cursor=pointer]:
+                - /url: /profile#career
+            - listitem [ref=e16]:
+              - link "Blog" [ref=e17] [cursor=pointer]:
+                - /url: /blog
+        - generic [ref=e18]:
+          - generic [ref=e19]: Tech
+          - list [ref=e21]:
+            - listitem [ref=e22]:
+              - link "Skills" [ref=e23] [cursor=pointer]:
+                - /url: /skills
+            - listitem [ref=e24]:
+              - link "Works" [ref=e25] [cursor=pointer]:
+                - /url: /works
+        - generic [ref=e26]:
+          - generic [ref=e27]: Contact
+          - list [ref=e29]:
+            - listitem [ref=e30]:
+              - link "Social" [ref=e31] [cursor=pointer]:
+                - /url: /social
+            - listitem [ref=e32]:
+              - link "Contact" [ref=e33] [cursor=pointer]:
+                - /url: /contact
+      - generic [ref=e34]:
+        - link "GitHub" [ref=e35] [cursor=pointer]:
+          - /url: https://github.com/mikio815
+          - img [ref=e36]
+        - link "Twitter" [ref=e38] [cursor=pointer]:
+          - /url: https://twitter.com/mikio815
+          - img [ref=e39]
+    - main [ref=e42]:
+      - generic [ref=e43]:
+        - generic [ref=e44]:
+          - paragraph [ref=e45]: work
+          - generic [ref=e46]:
+            - generic [ref=e47]:
+              - heading "二軸ジョイスティックによるポインティングデバイスのためのモジュール開発" [level=1] [ref=e48]
+              - paragraph [ref=e49]: Arduino Nanoを入力源とするLinux向けの自作ポインティングデバイスのモジュールを開発しました
+              - generic [ref=e50]:
+                - generic [ref=e51]: 情報科学特別演習
+                - generic [ref=e52]: Linux
+            - generic [ref=e53]:
+              - generic [ref=e54]:
+                - paragraph [ref=e55]: published
+                - paragraph [ref=e56]: 2026年1月13日
+              - generic [ref=e57]: PDF
+              - generic [ref=e58]:
+                - link "ブラウザで開く" [ref=e59] [cursor=pointer]:
+                  - /url: /works/jottoku-1.pdf
+                - link "Download" [ref=e60] [cursor=pointer]:
+                  - /url: /works/jottoku-1.pdf
+        - article [ref=e61]:
+          - heading "概要" [level=2] [ref=e62]
+          - paragraph [ref=e63]: Linuxで自作ポインティングデバイスを動かすために作ったモジュール
+        - iframe [ref=e65]:
+          
+  - generic [ref=e68]:
+    - button "Menu" [ref=e69]:
+      - img [ref=e71]
+      - generic: Menu
+    - button "Inspect" [ref=e75]:
+      - img [ref=e77]
+      - generic: Inspect
+    - button "Audit" [ref=e79]:
+      - generic [ref=e80]:
+        - img [ref=e81]
+        - img [ref=e84]
+      - generic: Audit
+    - button "Settings" [ref=e87]:
+      - img [ref=e89]
+      - generic: Settings

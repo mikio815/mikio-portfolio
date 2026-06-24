@@ -1,0 +1,117 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - heading "mikio815.dev" [level=1] [ref=e5]:
+        - link "mikio815.dev" [ref=e6] [cursor=pointer]:
+          - /url: /
+      - navigation "Primary" [ref=e7]:
+        - generic [ref=e8]:
+          - generic [ref=e9]: Profile
+          - list [ref=e11]:
+            - listitem [ref=e12]:
+              - link "About" [ref=e13] [cursor=pointer]:
+                - /url: /profile
+            - listitem [ref=e14]:
+              - link "Career" [ref=e15] [cursor=pointer]:
+                - /url: /profile#career
+            - listitem [ref=e16]:
+              - link "Blog" [ref=e17] [cursor=pointer]:
+                - /url: /blog
+        - generic [ref=e18]:
+          - generic [ref=e19]: Tech
+          - list [ref=e21]:
+            - listitem [ref=e22]:
+              - link "Skills" [ref=e23] [cursor=pointer]:
+                - /url: /skills
+            - listitem [ref=e24]:
+              - link "Works" [ref=e25] [cursor=pointer]:
+                - /url: /works
+        - generic [ref=e26]:
+          - generic [ref=e27]: Contact
+          - list [ref=e29]:
+            - listitem [ref=e30]:
+              - link "Social" [ref=e31] [cursor=pointer]:
+                - /url: /social
+            - listitem [ref=e32]:
+              - link "Contact" [ref=e33] [cursor=pointer]:
+                - /url: /contact
+      - generic [ref=e34]:
+        - link "GitHub" [ref=e35] [cursor=pointer]:
+          - /url: https://github.com/mikio815
+          - img [ref=e36]
+        - link "Twitter" [ref=e38] [cursor=pointer]:
+          - /url: https://twitter.com/mikio815
+          - img [ref=e39]
+    - main [ref=e42]:
+      - generic [ref=e43]:
+        - heading "Skills" [level=2] [ref=e45]
+        - list [ref=e46]:
+          - listitem [ref=e47]:
+            - generic [ref=e48]: Security / CTF
+            - generic [ref=e49]:
+              - generic [ref=e50]:
+                - generic [ref=e51]: pwntools
+                - generic [ref=e52]: CTFのpwnでexploitを書くときの常用ツール
+              - generic [ref=e53]:
+                - generic [ref=e54]: Ghidra
+                - generic [ref=e55]: リバースエンジニアリングのメイン環境
+              - generic [ref=e56]:
+                - generic [ref=e57]: pwndbg
+                - generic [ref=e58]: gdb拡張、動的解析で愛用
+              - generic [ref=e59]:
+                - generic [ref=e60]: Burp Suite
+                - generic [ref=e61]: Web問題の診断で触る
+          - listitem [ref=e62]:
+            - generic [ref=e63]: Low-level
+            - generic [ref=e64]:
+              - generic [ref=e65]:
+                - generic [ref=e66]: eBPF
+                - generic [ref=e67]: カーネルの挙動観測で勉強中
+              - generic [ref=e68]:
+                - generic [ref=e69]: Linux Kernel
+                - generic [ref=e70]: モジュール開発を少しずつ
+              - generic [ref=e71]:
+                - generic [ref=e72]: C
+                - generic [ref=e73]: 低レベルな処理を書くときに
+          - listitem [ref=e74]:
+            - generic [ref=e75]: Languages
+            - generic [ref=e76]:
+              - generic [ref=e77]:
+                - generic [ref=e78]: Rust
+                - generic [ref=e79]: ツール自作のメイン言語
+              - generic [ref=e80]:
+                - generic [ref=e81]: Python
+                - generic [ref=e82]: スクリプトやexploitで何でも
+              - generic [ref=e83]:
+                - generic [ref=e84]: TypeScript
+                - generic [ref=e85]: このサイトなどフロント周りで
+          - listitem [ref=e86]:
+            - generic [ref=e87]: Tools
+            - generic [ref=e88]:
+              - generic [ref=e89]:
+                - generic [ref=e90]: Docker
+                - generic [ref=e91]: 環境構築で日常的に
+              - generic [ref=e92]:
+                - generic [ref=e93]: Git
+                - generic [ref=e94]: バージョン管理の基本として
+              - generic [ref=e95]:
+                - generic [ref=e96]: Linux
+                - generic [ref=e97]: 普段使いの開発環境
+          - listitem [ref=e98]:
+            - generic [ref=e99]: 3D
+            - generic [ref=e101]:
+              - generic [ref=e102]: Blender
+              - generic [ref=e103]: 3Dモデリングで触る
+  - generic [ref=e106]:
+    - button "Menu" [ref=e107]:
+      - img [ref=e109]
+      - generic: Menu
+    - button "Inspect" [ref=e113]:
+      - img [ref=e115]
+      - generic: Inspect
+    - button "Audit" [ref=e117]:
+      - img [ref=e119]
+      - generic: Audit
+    - button "Settings" [ref=e122]:
+      - img [ref=e124]
+      - generic: Settings

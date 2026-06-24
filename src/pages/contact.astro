@@ -7,29 +7,27 @@ import { Icon } from "astro-icon/components";
 	title="Contact"
 	description="mikio815のポートフォリオ"
 >
-	<section class="mt-12 space-y-8 text-slate-900">
+	<section class="mt-12 space-y-12 text-slate-900">
 		<h2 class="text-6xl font-bold tussilago">Contact</h2>
-		<div class="flex flex-col gap-6 max-w-xl">
-			<a
-				href="mailto:contact@mikio815.dev"
-				class="flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-6 text-slate-900 shadow-sm transition hover:border-[#FF4081]/70 hover:shadow-lg"
-			>
-				<Icon name="mdi:email-outline" class="text-4xl text-[#FF4081]" />
-				<div>
-					<p class="futura text-sm uppercase tracking-[0.3em] text-slate-500">Email</p>
-					<p class="futura text-2xl">contact@mikio815.dev</p>
-				</div>
-			</a>
-			<a
-				href="/social"
-				class="flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-6 text-slate-900 shadow-sm transition hover:border-[#FF4081]/70 hover:shadow-lg"
-			>
-				<Icon name="mdi:share-variant" class="text-4xl text-[#FF4081]" />
-				<div>
-					<p class="futura text-sm uppercase tracking-[0.3em] text-slate-500">Social</p>
-					<p class="futura text-2xl">SNSや他の窓口はこちら</p>
-				</div>
-			</a>
-		</div>
+		<ul class="max-w-xl divide-y divide-slate-300 border-y border-slate-300">
+			<li>
+				<a
+					href="mailto:contact@mikio815.dev"
+					class="group flex items-center gap-4 py-5 transition hover:text-[#FF4081]"
+				>
+					<Icon name="mdi:email-outline" class="text-2xl" />
+					<span class="futura text-xl">contact@mikio815.dev</span>
+				</a>
+			</li>
+			<li>
+				<a
+					href="/social"
+					class="group flex items-center gap-4 py-5 transition hover:text-[#FF4081]"
+				>
+					<Icon name="mdi:share-variant" class="text-2xl" />
+					<span class="futura text-xl">SNSや他の窓口はこちら (TwitterのDMは解放しています)</span>
+				</a>
+			</li>
+		</ul>
 	</section>
 </DefaultLayout>

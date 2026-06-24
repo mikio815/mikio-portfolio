@@ -1,0 +1,85 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - heading "mikio815.dev" [level=1] [ref=e5]:
+        - link "mikio815.dev" [ref=e6] [cursor=pointer]:
+          - /url: /
+      - navigation "Primary" [ref=e7]:
+        - generic [ref=e8]:
+          - generic [ref=e9]: Profile
+          - list [ref=e11]:
+            - listitem [ref=e12]:
+              - link "About" [ref=e13] [cursor=pointer]:
+                - /url: /profile
+            - listitem [ref=e14]:
+              - link "Career" [ref=e15] [cursor=pointer]:
+                - /url: /profile#career
+            - listitem [ref=e16]:
+              - link "Blog" [ref=e17] [cursor=pointer]:
+                - /url: /blog
+        - generic [ref=e18]:
+          - generic [ref=e19]: Tech
+          - list [ref=e21]:
+            - listitem [ref=e22]:
+              - link "Skills" [ref=e23] [cursor=pointer]:
+                - /url: /skills
+            - listitem [ref=e24]:
+              - link "Works" [ref=e25] [cursor=pointer]:
+                - /url: /works
+        - generic [ref=e26]:
+          - generic [ref=e27]: Contact
+          - list [ref=e29]:
+            - listitem [ref=e30]:
+              - link "Social" [ref=e31] [cursor=pointer]:
+                - /url: /social
+            - listitem [ref=e32]:
+              - link "Contact" [ref=e33] [cursor=pointer]:
+                - /url: /contact
+      - generic [ref=e34]:
+        - link "GitHub" [ref=e35] [cursor=pointer]:
+          - /url: https://github.com/mikio815
+          - img [ref=e36]
+        - link "Twitter" [ref=e38] [cursor=pointer]:
+          - /url: https://twitter.com/mikio815
+          - img [ref=e39]
+    - main [ref=e42]:
+      - generic [ref=e43]:
+        - heading "Blog" [level=2] [ref=e45]
+        - list [ref=e46]:
+          - listitem [ref=e47]:
+            - 'link "2025年12月31日 #misc 2025年を振り返る 振り返りと、抱負です" [ref=e48] [cursor=pointer]':
+              - /url: /posts/post-4
+              - generic [ref=e49]:
+                - generic [ref=e50]: 2025年12月31日
+                - generic [ref=e52]: "#misc"
+              - heading "2025年を振り返る" [level=3] [ref=e53]
+              - paragraph [ref=e54]: 振り返りと、抱負です
+          - listitem [ref=e55]:
+            - 'link "2025年12月2日 #Cloud-Hypervisor Cloud-HypervisorのAPI経由でブートできない問題 投げるJSONの形式がドキュメントと違う" [ref=e56] [cursor=pointer]':
+              - /url: /posts/post-2
+              - generic [ref=e57]:
+                - generic [ref=e58]: 2025年12月2日
+                - generic [ref=e60]: "#Cloud-Hypervisor"
+              - heading "Cloud-HypervisorのAPI経由でブートできない問題" [level=3] [ref=e61]
+              - paragraph [ref=e62]: 投げるJSONの形式がドキュメントと違う
+          - listitem [ref=e63]:
+            - 'link "2025年7月1日 #astro first blog ポートフォリオを作りました" [ref=e64] [cursor=pointer]':
+              - /url: /posts/post-1
+              - generic [ref=e65]:
+                - generic [ref=e66]: 2025年7月1日
+                - generic [ref=e68]: "#astro"
+              - heading "first blog" [level=3] [ref=e69]
+              - paragraph [ref=e70]: ポートフォリオを作りました
+  - generic [ref=e73]:
+    - button "Menu" [ref=e74]:
+      - img [ref=e76]
+      - generic: Menu
+    - button "Inspect" [ref=e80]:
+      - img [ref=e82]
+      - generic: Inspect
+    - button "Audit" [ref=e84]:
+      - img [ref=e86]
+      - generic: Audit
+    - button "Settings" [ref=e89]:
+      - img [ref=e91]
+      - generic: Settings

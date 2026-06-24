@@ -47,50 +47,37 @@ const posts: PostListItem[] = Object.values(postModules)
 	description="mikio815のポートフォリオ"
 >
 	<section class="mt-12 max-w-4xl space-y-6">
-		<header class="mb-10 space-y-4">
+		<header class="mb-12 space-y-4">
 			<h2 class="text-4xl md:text-6xl tussilago">Blog</h2>
 		</header>
 
 		{posts.length === 0 ? (
 			<p class="text-gray-500">ブログがありません</p>
 		) : (
-			<ul class="space-y-6">
+			<ul class="divide-y divide-slate-300 border-y border-slate-300">
 				{posts.map((post) => (
 					<li>
-					<article class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#FF4081]/70 hover:shadow-lg">
-							<a
-								href={post.url}
-								class="absolute inset-0"
-								aria-label={`${post.frontmatter.title} の詳細へ`}
-							></a>
-							<div class="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.3em] text-gray-400 futura">
+						<a href={post.url} class="group block py-6 transition">
+							<div class="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-gray-400 futura">
 								<span>{post.formattedDate}</span>
 								{post.tags.length > 0 && (
-									<span class="inline-flex gap-2">
+									<span class="inline-flex gap-3 text-gray-500">
 										{post.tags.map((tag) => (
-											<span class="rounded-full bg-gray-900/5 px-3 py-1 text-[0.65rem] tracking-[0.2em] text-gray-600">
-												{tag}
-											</span>
+											<span>#{tag}</span>
 										))}
 									</span>
 								)}
 							</div>
-						<h3 class="mt-4 text-3xl md:text-[2.15rem] text-gray-900 heading-jp">
-							{post.frontmatter.title}
-						</h3>
-							<p class="mt-3 text-lg leading-relaxed text-gray-600">
+							<h3 class="mt-2 text-2xl md:text-3xl text-gray-900 heading-jp transition group-hover:text-[#FF4081]">
+								{post.frontmatter.title}
+							</h3>
+							<p class="mt-2 text-base leading-relaxed text-gray-600">
 								{post.frontmatter.description ?? "準備中です"}
 							</p>
-							<div class="mt-6 flex items-center gap-3 text-sm text-gray-500 futura">
-								<span>{post.frontmatter.author ?? "mikio"}</span>
-								<span class="h-px w-10 bg-gray-300" aria-hidden="true"></span>
-								<span>読む →</span>
-							</div>
-						</article>
+						</a>
 					</li>
 				))}
 			</ul>
 		)}
 	</section>
-
 </DefaultLayout>
