@@ -26,3 +26,5 @@ pnpm-debug.log*
 .vscode/
 
 src/pages/drafts/
+
+.playwright-mcp/
