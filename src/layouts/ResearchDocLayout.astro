@@ -1,0 +1,109 @@
+---
+import DefaultLayout from "./DefaultLayout.astro"
+import { antiCheatChapters, antiCheatDoc } from "../data/antiCheatDocs"
+
+const { frontmatter, headings = [] } = Astro.props
+const renderedContent = Astro.slots.has("default")
+	? await Astro.slots.render("default")
+	: ""
+const hasContent = renderedContent.trim().length > 0
+const tocHeadings = headings.filter(
+	(heading: { depth: number }) => heading.depth >= 2 && heading.depth <= 3,
+)
+const currentPath = Astro.url.pathname.replace(/\/$/, "")
+const currentIndex = antiCheatChapters.findIndex(
+	(chapter) => chapter.href === currentPath,
+)
+const currentChapter =
+	currentIndex >= 0
+		? antiCheatChapters[currentIndex]
+		: antiCheatChapters.find((chapter) => chapter.title === frontmatter.title)
+const previousChapter = currentIndex > 0 ? antiCheatChapters[currentIndex - 1] : null
+const nextChapter =
+	currentIndex >= 0 && currentIndex < antiCheatChapters.length - 1
+		? antiCheatChapters[currentIndex + 1]
+		: null
+const pageTitle = `${frontmatter.title} | ${antiCheatDoc.title}`
+const pageDescription = frontmatter.description ?? currentChapter?.description ?? antiCheatDoc.description
+---
+<DefaultLayout title={pageTitle} description={pageDescription}>
+	<section class="mt-12 max-w-6xl text-slate-900">
+		<header class="mb-10 space-y-4 border-b border-slate-300 pb-8">
+			<div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+				<a href={antiCheatDoc.basePath} class="futura text-xs uppercase tracking-[0.3em] text-slate-500 transition hover:text-[#FF4081]">
+					Docs top
+				</a>
+				<a href={antiCheatDoc.worksPath} class="futura text-xs uppercase tracking-[0.3em] text-slate-400 transition hover:text-[#FF4081]">
+					Works
+				</a>
+			</div>
+			<div class="grid gap-5 lg:grid-cols-[minmax(0,1fr)_220px] lg:items-end">
+				<div class="min-w-0 space-y-3">
+					<p class="futura text-xs uppercase tracking-[0.4em] text-slate-500">anti-cheat docs</p>
+					<h1 class="heading-jp text-3xl leading-tight md:text-5xl">{frontmatter.title}</h1>
+					{pageDescription && <p class="max-w-3xl text-base leading-relaxed text-slate-600 md:text-lg">{pageDescription}</p>}
+				</div>
+				{currentChapter && (
+					<p class="futura text-sm uppercase tracking-[0.25em] text-slate-500 lg:text-right">
+						Chapter {String(currentChapter.order).padStart(2, "0")}
+					</p>
+				)}
+			</div>
+		</header>
+
+		<div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_220px] lg:items-start">
+			<div class="min-w-0">
+				{hasContent && (
+					<article class="post-content">
+						<Fragment set:html={renderedContent} />
+					</article>
+				)}
+
+				<nav class="mt-12 grid gap-3 border-t border-slate-300 pt-8 sm:grid-cols-3" aria-label="章の移動">
+					{previousChapter ? (
+						<a href={previousChapter.href} class="group block border border-slate-300 bg-white px-5 py-4 transition hover:border-[#FF4081]">
+							<span class="futura text-[0.65rem] uppercase tracking-[0.25em] text-slate-400">previous</span>
+							<span class="mt-1 block font-semibold text-slate-800 transition group-hover:text-[#FF4081]">{previousChapter.title}</span>
+						</a>
+					) : (
+						<a href={antiCheatDoc.worksPath} class="group block border border-slate-300 bg-white px-5 py-4 transition hover:border-[#FF4081]">
+							<span class="futura text-[0.65rem] uppercase tracking-[0.25em] text-slate-400">back to</span>
+							<span class="mt-1 block font-semibold text-slate-800 transition group-hover:text-[#FF4081]">Works</span>
+						</a>
+					)}
+					<a href={antiCheatDoc.basePath} class="group block border border-slate-300 bg-white px-5 py-4 transition hover:border-[#FF4081] sm:text-center">
+						<span class="futura text-[0.65rem] uppercase tracking-[0.25em] text-slate-400">docs top</span>
+						<span class="mt-1 block font-semibold text-slate-800 transition group-hover:text-[#FF4081]">目次へ戻る</span>
+					</a>
+					{nextChapter && (
+						<a href={nextChapter.href} class="group block border border-slate-300 bg-white px-5 py-4 text-left transition hover:border-[#FF4081] sm:text-right">
+							<span class="futura text-[0.65rem] uppercase tracking-[0.25em] text-slate-400">next</span>
+							<span class="mt-1 block font-semibold text-slate-800 transition group-hover:text-[#FF4081]">{nextChapter.title}</span>
+						</a>
+					)}
+				</nav>
+			</div>
+
+			{tocHeadings.length > 0 && (
+				<aside class="lg:sticky lg:top-10">
+					<nav aria-label="このページの見出し" class="border-y border-slate-300">
+						<p class="futura border-b border-slate-300 px-1 py-3 text-[0.65rem] uppercase tracking-[0.25em] text-slate-400">
+							on this page
+						</p>
+						{tocHeadings.map((heading: { depth: number; slug: string; text: string }) => (
+							<a
+								href={`#${heading.slug}`}
+								class:list={[
+									"block border-b border-slate-300 px-1 py-3 text-slate-700 transition last:border-b-0 hover:text-[#FF4081]",
+									heading.depth === 3 ? "pl-5 text-sm" : "font-semibold",
+								]}
+							>
+								<span class="block leading-relaxed">{heading.text}</span>
+							</a>
+						))}
+					</nav>
+				</aside>
+			)}
+		</div>
+	</section>
+</DefaultLayout>

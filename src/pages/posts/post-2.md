@@ -1,10 +1,13 @@
 ---
 layout: ../../layouts/BlogLayout.astro
 title: 'Cloud-HypervisorのAPI経由でブートできない問題'
+titleEn: 'Cloud-Hypervisor API boot issue'
 pubDate: "2025-12-02"
 description: '投げるJSONの形式がドキュメントと違う'
+descriptionEn: 'JSON shape differs from docs.'
 author: 'mikio'
 tags: ["Cloud-Hypervisor"]
+contentLocale: "ja"
 ---
 
 [EC2-Proto](https://github.com/mikio815/ec2-proto)

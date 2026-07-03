@@ -1,208 +1,67 @@
 ---
-import "../styles/global.css"
-import SocialLinks from "../components/SocialLinks.astro"
-import MobileMenu from "../components/MobileMenu.astro"
-const { frontmatter } = Astro.props;
+import DefaultLayout from "./DefaultLayout.astro"
+import { normalizeLocale, type Locale } from "../data/siteLocale"
 
-const SITE = {
-	baseUrl: "https://mikio815.dev",
-	title: "mikio815.dev",
-	description: "mikio815のポートフォリオ",
-	ogImage: "/OGP.png",
-}
-
+const { frontmatter } = Astro.props
+const locale: Locale = normalizeLocale(frontmatter.locale, Astro.url.pathname)
 const formattedPubDate = new Date(frontmatter.pubDate).toLocaleDateString(
-	"ja-JP",
+	locale === "en" ? "en-US" : "ja-JP",
 	{
 		year: "numeric",
 		month: "long",
 		day: "numeric",
 	},
 )
-
 const tags = Array.isArray(frontmatter.tags) ? frontmatter.tags : []
-const pageTitle = `${frontmatter.title} | ${SITE.title}`
-const pageDescription = frontmatter.description ?? SITE.description
-const canonical = new URL(Astro.url.pathname, SITE.baseUrl).toString()
-const resolvedOgImage = (() => {
-	const source = frontmatter.ogImage ?? SITE.ogImage
-	return source.startsWith("http")
-		? source
-		: new URL(source, SITE.baseUrl).toString()
-})()
+const pageDescription = frontmatter.description
 const publishedISO = new Date(frontmatter.pubDate).toISOString()
+const backLabel = locale === "en" ? "Back to blog" : "一覧に戻る"
+const backHref = locale === "en" ? "/en/blog" : "/blog"
 ---
-<html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://use.typekit.net" crossorigin />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://use.typekit.net/vpb1wur.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" />
-  <title>{pageTitle}</title>
-  <meta name="description" content={pageDescription} />
-  <link rel="canonical" href={canonical} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content={SITE.title} />
-  <meta property="og:title" content={pageTitle} />
-  <meta property="og:description" content={pageDescription} />
-  <meta property="og:url" content={canonical} />
-  <meta property="og:image" content={resolvedOgImage} />
-  <meta property="article:published_time" content={publishedISO} />
-  {tags.map((tag) => (
-	  <meta property="article:tag" content={tag} />
-  ))}
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@mikio815" />
-  <meta name="twitter:title" content={pageTitle} />
-  <meta name="twitter:description" content={pageDescription} />
-  <meta name="twitter:image" content={resolvedOgImage} />
-</head>
-<body class="m-0 p-0 text-gray-900 bg-[#ECEFF1]">
-  <div class="flex flex-col min-h-screen lg:flex-row">
-    <!-- モバイル用トップバー -->
-    <header class="flex items-center justify-between px-6 py-4 lg:hidden">
-      <h1 class="text-2xl font-bold tussilago">
-        <a href="/">mikio815.dev</a>
-      </h1>
-      <button
-        id="mobile-menu-button"
-        type="button"
-        class="inline-flex flex-col items-center justify-center gap-1.5 w-12 h-12 shrink-0 rounded-full border border-slate-300 bg-white shadow-md shadow-slate-300/60 ring-2 ring-white/70 active:scale-[0.97] transition"
-        aria-label="Open navigation"
-        aria-expanded="false"
-      >
-        <span class="block h-0.5 w-6 bg-slate-800"></span>
-        <span class="block h-0.5 w-6 bg-slate-800"></span>
-        <span class="block h-0.5 w-6 bg-slate-800"></span>
-      </button>
-    </header>
+<DefaultLayout
+	title={frontmatter.title}
+	description={pageDescription}
+	ogImage={frontmatter.ogImage}
+	ogType="article"
+	locale={locale}
+>
+	<Fragment slot="head">
+		<meta property="article:published_time" content={publishedISO} />
+		{tags.map((tag: string) => (
+			<meta property="article:tag" content={tag} />
+		))}
+	</Fragment>
 
-    <aside class="hidden w-full px-6 py-6 lg:w-72 xl:w-80 lg:px-8 lg:py-10 lg:h-screen lg:fixed lg:top-0 lg:left-0 lg:flex lg:flex-col lg:overflow-y-auto lg:bg-[#ECEFF1] lg:z-10">
-      <div class="flex flex-wrap items-center justify-between gap-4">
-        <h1 class="text-2xl font-bold tussilago lg:text-3xl">
-          <a href="/">mikio815.dev</a>
-        </h1>
-        <SocialLinks class="w-full justify-start lg:hidden" />
-      </div>
-      <nav class="mt-8 flex flex-col gap-12 text-black flex-1" aria-label="Primary">
-        <div class="flex items-stretch gap-4">
-          <span class="writing-vertical-lr text-sm font-normal futura lg:text-base text-black leading-none">Profile</span>
-          <span class="block self-stretch w-[1.5px] h-full bg-slate-800/70"></span>
-          <ul class="space-y-3 text-lg font-medium futura lg:text-2xl lg:space-y-5">
-            <li>
-              <a href="/profile" class="text-black transition-colors duration-200">About</a>
-            </li>
-            <li>
-              <a href="/profile#career" class="text-black transition-colors duration-200">Career</a>
-            </li>
-            <li>
-              <a href="/blog" class="text-black transition-colors duration-200">Blog</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="flex items-stretch gap-4">
-          <span class="writing-vertical-lr text-sm font-normal futura lg:text-base text-black leading-none">Tech</span>
-          <span class="block self-stretch w-[1.5px] h-full bg-slate-800/70"></span>
-          <ul class="space-y-3 text-lg font-medium futura lg:text-2xl lg:space-y-5">
-            <li>
-              <a href="/skills" class="text-black transition-colors duration-200">Skills</a>
-            </li>
-            <li>
-              <a href="/works" class="text-black transition-colors duration-200">Works</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="flex items-stretch gap-4">
-          <span class="writing-vertical-lr text-sm font-normal futura lg:text-base text-black leading-none">Contact</span>
-          <span class="block self-stretch w-[1.5px] h-full bg-slate-800/70"></span>
-          <ul class="space-y-3 text-lg font-medium futura lg:text-2xl lg:space-y-5">
-            <li>
-              <a href="/social" class="text-black transition-colors duration-200">Social</a>
-            </li>
-            <li>
-              <a href="/contact" class="text-black transition-colors duration-200">Contact</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <SocialLinks class="hidden lg:flex mt-10 lg:mt-auto" />
-    </aside>
-    <div aria-hidden="true" class="hidden lg:block lg:w-72 xl:w-80 flex-shrink-0"></div>
-    <main class="flex-1 w-full px-6 py-10 lg:px-10 lg:py-14">
-      <div class="w-full max-w-4xl mr-auto">
-        <header class="space-y-5">
-          <p class="text-xs uppercase tracking-[0.4em] text-gray-400 futura">entry</p>
-          <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
-            <h1 class="heading-jp text-3xl md:text-4xl leading-tight">{frontmatter.title}</h1>
-            <p class="futura shrink-0 text-sm text-gray-500">{formattedPubDate}</p>
-          </div>
-          {frontmatter.description && (
-            <p class="text-lg text-gray-600 leading-relaxed">{frontmatter.description}</p>
-          )}
-          {tags.length > 0 && (
-            <div class="flex flex-wrap gap-2 text-xs text-gray-600 futura">
-              {tags.map((tag) => (
-                <span class="rounded-full border border-slate-300 px-3 py-1 uppercase tracking-[0.15em]">{tag}</span>
-              ))}
-            </div>
-          )}
-        </header>
-        <article class="post-content mt-10 border-t border-slate-300 pt-10">
-          <slot />
-        </article>
-        <div class="mt-12 border-t border-slate-300 pt-8">
-          <a
-            href="/blog"
-            class="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-800 transition hover:-translate-y-[1px] hover:border-[#FF4081]"
-            aria-label="一覧に戻る"
-          >
-            <span aria-hidden="true">←</span>
-            <span>一覧に戻る</span>
-          </a>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  <MobileMenu />
-
-  <script is:inline>
-    const btn = document.getElementById("mobile-menu-button");
-    const closeBtn = document.getElementById("mobile-menu-close");
-    const overlay = document.getElementById("mobile-menu-overlay");
-    const openMenu = () => {
-      if (!overlay) return;
-      overlay.classList.remove("opacity-0", "pointer-events-none");
-      overlay.classList.add("opacity-100");
-      btn?.setAttribute("aria-expanded", "true");
-      document.body.classList.add("overflow-hidden");
-    };
-    const closeMenu = () => {
-      if (!overlay) return;
-      overlay.classList.add("pointer-events-none");
-      overlay.classList.remove("opacity-100");
-      overlay.classList.add("opacity-0");
-      btn?.setAttribute("aria-expanded", "false");
-      document.body.classList.remove("overflow-hidden");
-    };
-    btn?.addEventListener("click", openMenu);
-    closeBtn?.addEventListener("click", closeMenu);
-    overlay?.addEventListener("click", (e) => {
-      const panel = overlay.querySelector("[data-mobile-menu-panel]");
-      if (e.target === overlay || e.target === overlay.querySelector("[data-mobile-menu-backdrop]")) {
-        closeMenu();
-      } else if (panel && !panel.contains(e.target)) {
-        closeMenu();
-      }
-    });
-    overlay?.querySelectorAll("a").forEach((a) => {
-      a.addEventListener("click", closeMenu);
-    });
-  </script>
-</body>
-</html>
+	<div class="w-full max-w-4xl mr-auto">
+		<header class="space-y-5">
+			<p class="text-xs uppercase tracking-[0.4em] text-gray-400 futura">entry</p>
+			<div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
+				<h1 class="heading-jp text-3xl md:text-4xl leading-tight">{frontmatter.title}</h1>
+				<p class="futura shrink-0 text-sm text-gray-500">{formattedPubDate}</p>
+			</div>
+			{frontmatter.description && (
+				<p class="text-lg text-gray-600 leading-relaxed">{frontmatter.description}</p>
+			)}
+			{tags.length > 0 && (
+				<div class="flex flex-wrap gap-2 text-xs text-gray-600 futura">
+					{tags.map((tag: string) => (
+						<span class="rounded-full border border-slate-300 px-3 py-1 uppercase tracking-[0.15em]">{tag}</span>
+					))}
+				</div>
+			)}
+		</header>
+		<article class="post-content mt-10 border-t border-slate-300 pt-10">
+			<slot />
+		</article>
+		<div class="mt-12 border-t border-slate-300 pt-8">
+			<a
+				href={backHref}
+				class="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-800 transition hover:-translate-y-[1px] hover:border-[#FF4081]"
+				aria-label={backLabel}
+			>
+				<span aria-hidden="true">←</span>
+				<span>{backLabel}</span>
+			</a>
+		</div>
+	</div>
+</DefaultLayout>

@@ -9,6 +9,12 @@ const formattedPubDate = frontmatter.pubDate
 	: "N/A"
 const hasSlide = Boolean(frontmatter.asset && frontmatter.format)
 const assetPath = normalizePath(frontmatter.asset)
+const docsPath = normalizePath(frontmatter.docsPath)
+const hasDocs = Boolean(docsPath)
+const renderedContent = Astro.slots.has("default")
+	? await Astro.slots.render("default")
+	: ""
+const hasContent = renderedContent.trim().length > 0
 ---
 <DefaultLayout title={frontmatter.title} description={frontmatter.description}>
 	<section class="mt-12 max-w-4xl text-slate-900">
@@ -36,32 +42,46 @@ const assetPath = normalizePath(frontmatter.asset)
 							{frontmatter.format.toUpperCase()}
 						</span>
 					)}
-					{hasSlide && (
+					{(hasSlide || hasDocs) && (
 						<div class="flex w-full flex-wrap justify-start gap-3 md:justify-end">
-							<a
-								href={assetPath}
-								target="_blank"
-								rel="noreferrer"
-								class="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:translate-y-[1px]"
-							>
-								{isPdf(frontmatter.format) ? "ブラウザで開く" : "ダウンロードで開く"}
-							</a>
-							<a
-								href={assetPath}
-								download
-								class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 transition hover:border-[#FF4081]"
-							>
-								Download
-							</a>
+							{hasDocs && (
+								<a
+									href={docsPath}
+									class="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:translate-y-[1px]"
+								>
+									読む
+								</a>
+							)}
+							{hasSlide && (
+								<>
+									<a
+										href={assetPath}
+										target="_blank"
+										rel="noreferrer"
+										class="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:translate-y-[1px]"
+									>
+										{isPdf(frontmatter.format) ? "ブラウザで開く" : "ダウンロードで開く"}
+									</a>
+									<a
+										href={assetPath}
+										download
+										class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 transition hover:border-[#FF4081]"
+									>
+										Download
+									</a>
+								</>
+							)}
 						</div>
 					)}
 				</div>
 			</div>
 		</header>
 
-		<article class="post-content mt-10 border-t border-slate-300 pt-10">
-			<slot />
-		</article>
+		{hasContent && (
+			<article class="post-content mt-10 border-t border-slate-300 pt-10">
+				<Fragment set:html={renderedContent} />
+			</article>
+		)}
 
 		{hasSlide && isPdf(frontmatter.format) && (
 			<div class="mt-10 border-t border-slate-300 pt-8">

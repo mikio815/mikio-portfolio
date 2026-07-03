@@ -1,0 +1,40 @@
+---
+import DefaultLayout from "../../layouts/DefaultLayout.astro"
+import { Icon } from "astro-icon/components"
+---
+<DefaultLayout
+	title="Social"
+	description="Social links for mikio815"
+>
+	<section class="mt-12 text-slate-900 space-y-12">
+		<header>
+			<h2 class="text-6xl font-bold tussilago">Social</h2>
+		</header>
+		<ul class="max-w-2xl divide-y divide-slate-300 border-y border-slate-300">
+			<li>
+				<a
+					href="https://x.com/mikio815"
+					target="_blank"
+					rel="noreferrer noopener"
+					class="group flex items-center gap-4 py-5 transition hover:text-[#FF4081]"
+				>
+					<Icon name="mdi:twitter" class="text-2xl" />
+					<span class="futura text-xl">@mikio815</span>
+					<span class="futura ml-auto text-sm uppercase tracking-[0.25em] text-slate-400">Twitter</span>
+				</a>
+			</li>
+			<li>
+				<a
+					href="https://github.com/mikio815"
+					target="_blank"
+					rel="noreferrer noopener"
+					class="group flex items-center gap-4 py-5 transition hover:text-[#FF4081]"
+				>
+					<Icon name="mdi:github" class="text-2xl" />
+					<span class="futura text-xl">@mikio815</span>
+					<span class="futura ml-auto text-sm uppercase tracking-[0.25em] text-slate-400">GitHub</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+</DefaultLayout>

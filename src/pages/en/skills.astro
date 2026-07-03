@@ -1,0 +1,115 @@
+---
+import DefaultLayout from "../../layouts/DefaultLayout.astro"
+
+const skillGroups = [
+	{
+		label: "Security / CTF",
+		items: [
+			{ name: "pwntools", note: "Pwn exploits" },
+			{ name: "Ghidra", note: "Reverse engineering" },
+			{ name: "Burp Suite", note: "Web testing" },
+		],
+	},
+	{
+		label: "Low-level",
+		items: [
+			{ name: "eBPF", note: "Anti-cheat instrumentation" },
+			{ name: "Linux Kernel", note: "Kernel work" },
+			{ name: "TEE, CC", note: "CC prototypes" },
+		],
+	},
+	{
+		label: "Languages",
+		items: [
+			{ name: "Rust", note: "Anti-cheat implementation" },
+			{ name: "Python", note: "Exploit tooling" },
+			{ name: "TypeScript", note: "Frontend work" },
+			{ name: "C", note: "Pwn and kernel work" },
+		],
+	},
+	{
+		label: "3D",
+		items: [
+			{ name: "Blender", note: "Modeling" },
+		],
+	},
+]
+
+const profileLists = [
+	{
+		label: "Focus",
+		items: [
+			{ text: "Anti-cheat architecture", note: "Main project. Notes: ", link: { href: "https://github.com/mikio815/linux-anticheat/blob/main/README.md", label: "here" } },
+			{ text: "Confidential Computing", note: "Remote attestation testbeds." },
+			{ text: "CTF pwn", note: "Strongest CTF field." },
+			{ text: "Web vulnerability research", note: "Professional work." },
+		],
+	},
+	{
+		label: "Next",
+		items: [
+			{ text: "ML infrastructure hypervisors", note: "Supercomputers and GPU clusters." },
+			{ text: "Windows / Hyper-V exploitation", note: "High on my list." },
+			{ text: "LLL", note: "Math and crypto fundamentals." },
+			{ text: "Blockchain", note: "On the backlog." },
+		],
+	},
+	{
+		label: "Learning",
+		items: [
+			{ text: "Web application development", note: "Mostly exploit-side so far." },
+			{ text: "Compilers and language specs", note: "Limited experience." },
+		],
+	},
+]
+---
+<DefaultLayout
+	title="Skills"
+	description="Skills and interests of mikio815"
+>
+	<section class="mt-12 max-w-3xl text-slate-900">
+		<header class="mb-12">
+			<h2 class="text-6xl font-bold tussilago">Skills</h2>
+		</header>
+		<p class="font-light text-lg leading-relaxed text-slate-600 mb-6">Security first.</p>
+		<div class="mb-16 space-y-10">
+			{profileLists.map((list) => (
+				<div>
+					<p class="mb-3 text-lg font-medium text-slate-900">{list.label}</p>
+					<ul class="list-disc space-y-4 pl-16 text-slate-600 marker:text-slate-400">
+						{list.items.map((item) => (
+							<li class="leading-relaxed">
+								<span class="block text-base text-slate-900">{item.text}</span>
+								{item.note && (
+									<span class="mt-0.5 block text-sm text-slate-500">
+										{item.note}
+										{item.link && (
+											<a href={item.link.href} class="text-slate-700 underline underline-offset-2 hover:text-slate-900">{item.link.label}</a>
+										)}
+									</span>
+								)}
+							</li>
+						))}
+					</ul>
+				</div>
+			))}
+		</div>
+		<ul class="divide-y divide-slate-300 border-y border-slate-300">
+			{skillGroups.map((group) => (
+				<li class="flex flex-col gap-3 py-6 sm:flex-row sm:gap-8">
+					<span class="shrink-0 pt-1 text-xs uppercase tracking-[0.2em] text-slate-500 futura sm:w-40">
+						{group.label}
+					</span>
+					<div class="flex-1 space-y-4">
+						{group.items.map((item) => (
+							<div class="flex flex-col gap-x-4 gap-y-0.5 sm:flex-row sm:items-baseline">
+								<span class="w-36 shrink-0 text-base font-medium text-slate-900">{item.name}</span>
+								<span class="text-sm leading-relaxed text-slate-500">{item.note}</span>
+							</div>
+						))}
+					</div>
+				</li>
+			))}
+		</ul>
+	</section>
+</DefaultLayout>

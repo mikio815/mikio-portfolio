@@ -1,0 +1,64 @@
+---
+import DefaultLayout from "../../layouts/DefaultLayout.astro"
+---
+<DefaultLayout
+	title="Profile"
+	description="Profile of mikio815"
+>
+	<section id="about" class="scroll-mt-24 mt-12 text-slate-900">
+		<h2 class="text-6xl font-bold mb-6 tussilago">About</h2>
+		<div class="flex flex-col sm:flex-row items-center gap-18 mt-12">
+			<img src="/icon.jpg" alt="Portrait icon of mikio815" class="w-64 h-64 rounded-lg">
+			<div>
+				<h2 class="futura font-bold text-7xl">mikio</h2>
+				<p class="futura font-md text-4xl mt-10">CTF(pwn), Linux kernel, ...and more!</p>
+			</div>
+		</div>
+		<div class="mt-20 space-y-4">
+			<p class="futura text-2xl font-light text-slate-600">
+				Information Science, University of Tsukuba (B3, 2026)
+			</p>
+			<p class="font-light text-lg leading-relaxed text-slate-600">
+				CTF pwn, kernels, Confidential Computing, and anti-cheat.
+			</p>
+			<p class="font-light text-lg leading-relaxed text-slate-600">Open to internships and new-grad roles -
+				<a href="/en/social" class="text-slate-700 underline underline-offset-2 hover:text-slate-900">social</a></p>
+		</div>
+	</section>
+
+	<section id="career" class="scroll-mt-24 my-20 text-slate-900">
+		<h2 class="text-6xl font-bold mb-10 tussilago">Career</h2>
+		<ul class="space-y-6 font-light text-lg text-slate-700">
+			<li class="relative flex items-start gap-3 pl-10
+				before:content-[''] before:absolute before:left-1 before:top-2 before:w-3 before:h-3 before:rounded-full before:border before:border-slate-500 before:bg-transparent
+				after:content-[''] after:absolute after:left-[0.625rem] after:top-5 after:bottom-5 after:w-[1.5px] after:bg-slate-400 last:after:hidden">
+				<span class="tabular-nums font-normal text-slate-700 w-20 text-right">2024.04</span>
+				<span class="leading-relaxed">University of Tsukuba, Information Science</span>
+			</li>
+			<li class="relative flex items-start gap-3 pl-10
+				before:content-[''] before:absolute before:left-1 before:top-2 before:w-3 before:h-3 before:rounded-full before:border before:border-slate-500 before:bg-transparent
+				after:content-[''] after:absolute after:left-[0.625rem] after:top-5 after:bottom-5 after:w-[1.5px] after:bg-slate-400 last:after:hidden">
+				<span class="tabular-nums font-normal text-slate-700 w-20 text-right">2026.03</span>
+				<span class="leading-relaxed">Professional Services Intern, GMO Flatt Security (ongoing)</span>
+			</li>
+			<li class="relative flex items-start gap-3 pl-10
+				before:content-[''] before:absolute before:left-1 before:top-2 before:w-3 before:h-3 before:rounded-full before:border before:border-slate-500 before:bg-transparent
+				after:content-[''] after:absolute after:left-[0.625rem] after:top-5 after:bottom-5 after:w-[1.5px] after:bg-slate-400 last:after:hidden">
+				<span class="tabular-nums font-normal text-slate-700 w-20 text-right">2026.06</span>
+				<span class="leading-relaxed">Security Camp L1 CVM Course</span>
+			</li>
+			<li class="relative flex items-start gap-3 pl-10
+				before:content-[''] before:absolute before:left-1 before:top-2 before:w-3 before:h-3 before:rounded-full before:border before:border-slate-500 before:bg-transparent
+				after:content-[''] after:absolute after:left-[0.625rem] after:top-5 after:bottom-5 after:w-[1.5px] after:bg-slate-400 last:after:hidden">
+				<span class="tabular-nums font-normal text-slate-700 w-20 text-right">2026.06</span>
+				<span class="leading-relaxed">SecHack365 Learning-Driven Course, Ogami Seminar</span>
+			</li>
+			<li class="relative flex items-start gap-3 pl-10
+				before:content-[''] before:absolute before:left-1 before:top-2 before:w-3 before:h-3 before:rounded-full before:border before:border-slate-500 before:bg-transparent
+				after:content-[''] after:absolute after:left-[0.625rem] after:top-5 after:bottom-5 after:w-[1.5px] after:bg-slate-400 last:after:hidden">
+				<span class="tabular-nums font-normal text-slate-700 w-20 text-right">2028.03</span>
+				<span class="leading-relaxed">Expected graduation</span>
+			</li>
+		</ul>
+	</section>
+</DefaultLayout>

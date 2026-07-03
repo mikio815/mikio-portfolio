@@ -1,0 +1,98 @@
+---
+import DefaultLayout from "../../layouts/DefaultLayout.astro"
+
+type BlogFrontmatter = {
+	title: string
+	titleEn?: string
+	description?: string
+	descriptionEn?: string
+	pubDate: string
+	tags?: string[]
+	author?: string
+	contentLocale?: string
+}
+
+type PostModule = {
+	frontmatter: BlogFrontmatter
+	url: string
+}
+
+type PostListItem = PostModule & {
+	tags: string[]
+	formattedDate: string
+	displayTitle: string
+	displayDescription: string
+}
+
+const formatDate = (value: string) =>
+	new Date(value).toLocaleDateString("en-US", {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	})
+
+const postModules = import.meta.glob<PostModule>("../posts/*.md", {
+	eager: true,
+})
+
+const posts: PostListItem[] = Object.values(postModules)
+	.map((post) => ({
+		...post,
+		tags: post.frontmatter.tags ?? [],
+		formattedDate: formatDate(post.frontmatter.pubDate),
+		displayTitle: post.frontmatter.titleEn ?? post.frontmatter.title,
+		displayDescription:
+			post.frontmatter.descriptionEn ??
+			post.frontmatter.description ??
+			"Draft in progress",
+	}))
+	.sort(
+		(a, b) =>
+			new Date(b.frontmatter.pubDate).getTime() -
+			new Date(a.frontmatter.pubDate).getTime(),
+	)
+---
+<DefaultLayout
+	title="Blog"
+	description="Blog posts by mikio815"
+>
+	<section class="mt-12 max-w-4xl space-y-6">
+		<header class="mb-12 space-y-4">
+			<h2 class="text-4xl md:text-6xl tussilago">Blog</h2>
+		</header>
+
+		{posts.length === 0 ? (
+			<p class="text-gray-500">No posts yet.</p>
+		) : (
+			<ul class="divide-y divide-slate-300 border-y border-slate-300">
+				{posts.map((post) => (
+					<li>
+						<a href={post.url} class="group block py-6 transition">
+							<div class="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-gray-400 futura">
+								<span>{post.formattedDate}</span>
+								{post.frontmatter.contentLocale && (
+									<span class="inline-flex items-center rounded-full border border-slate-300 px-2 py-0.5 text-[0.65rem] font-semibold text-slate-500">
+										{post.frontmatter.contentLocale}
+									</span>
+								)}
+								{post.tags.length > 0 && (
+									<span class="inline-flex gap-3 text-gray-500">
+										{post.tags.map((tag) => (
+											<span>#{tag}</span>
+										))}
+									</span>
+								)}
+							</div>
+							<h3 class="mt-2 text-2xl md:text-3xl text-gray-900 heading-jp transition group-hover:text-[#FF4081]">
+								{post.displayTitle}
+							</h3>
+							<p class="mt-2 text-base leading-relaxed text-gray-600">
+								{post.displayDescription}
+							</p>
+						</a>
+					</li>
+				))}
+			</ul>
+		)}
+	</section>
+</DefaultLayout>

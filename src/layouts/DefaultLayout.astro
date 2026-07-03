@@ -2,18 +2,37 @@
 import "../styles/global.css"
 import SocialLinks from "../components/SocialLinks.astro"
 import MobileMenu from "../components/MobileMenu.astro"
+import {
+	getAlternateLocalePath,
+	getNavGroups,
+	normalizeLocale,
+	siteCopy,
+} from "../data/siteLocale"
 
 const SITE = {
 	baseUrl: "https://mikio815.dev",
 	title: "mikio815.dev",
-	description: "mikio815のポートフォリオ",
 	ogImage: "/OGP.png",
 }
 
-const { title, description, ogImage } = Astro.props
+const locale = normalizeLocale(Astro.props.locale, Astro.url.pathname)
+const copy = siteCopy[locale]
+const navGroups = getNavGroups(locale)
+const {
+	title,
+	description,
+	ogImage,
+	ogType = "website",
+	alternatePath: alternatePathProp,
+} = Astro.props
 const pageTitle = title ? `${title} | ${SITE.title}` : SITE.title
-const pageDescription = description ?? SITE.description
+const pageDescription = description ?? copy.description
 const canonical = new URL(Astro.url.pathname, SITE.baseUrl).toString()
+const alternatePath =
+	alternatePathProp ?? getAlternateLocalePath(Astro.url.pathname, locale)
+const alternateUrl = new URL(alternatePath, SITE.baseUrl).toString()
+const selfHrefLang = locale === "ja" ? "ja" : "en"
+const alternateHrefLang = locale === "ja" ? "en" : "ja"
 const resolvedOgImage = (() => {
 	if (!ogImage) {
 		return new URL(SITE.ogImage, SITE.baseUrl).toString()
@@ -23,7 +42,7 @@ const resolvedOgImage = (() => {
 		: new URL(ogImage, SITE.baseUrl).toString()
 })()
 ---
-<html lang="ja">
+<html lang={selfHrefLang}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,7 +54,9 @@ const resolvedOgImage = (() => {
   <title>{pageTitle}</title>
   <meta name="description" content={pageDescription} />
   <link rel="canonical" href={canonical} />
-  <meta property="og:type" content="website" />
+  <link rel="alternate" hreflang={selfHrefLang} href={canonical} />
+  <link rel="alternate" hreflang={alternateHrefLang} href={alternateUrl} />
+  <meta property="og:type" content={ogType} />
   <meta property="og:site_name" content={SITE.title} />
   <meta property="og:title" content={pageTitle} />
   <meta property="og:description" content={pageDescription} />
@@ -46,78 +67,69 @@ const resolvedOgImage = (() => {
   <meta name="twitter:title" content={pageTitle} />
   <meta name="twitter:description" content={pageDescription} />
   <meta name="twitter:image" content={resolvedOgImage} />
+  <slot name="head" />
 </head>
 <body class="m-0 p-0 text-gray-900 bg-[#ECEFF1]">
   <div class="flex flex-col min-h-screen lg:flex-row">
     <!-- モバイル用トップバー -->
     <header class="flex items-center justify-between px-6 py-4 lg:hidden">
       <h1 class="text-2xl font-bold tussilago">
-        <a href="/">mikio815.dev</a>
+        <a href={locale === "en" ? "/en/" : "/"}>mikio815.dev</a>
       </h1>
-      <button
-        id="mobile-menu-button"
-        type="button"
-        class="inline-flex flex-col items-center justify-center gap-1.5 w-12 h-12 shrink-0 rounded-full border border-slate-300 bg-white shadow-md shadow-slate-300/60 ring-2 ring-white/70 active:scale-[0.97] transition"
-        aria-label="Open navigation"
-        aria-expanded="false"
-      >
-        <span class="block h-0.5 w-6 bg-slate-800"></span>
-        <span class="block h-0.5 w-6 bg-slate-800"></span>
-        <span class="block h-0.5 w-6 bg-slate-800"></span>
-      </button>
+      <div class="flex items-center gap-3">
+        <a
+          href={alternatePath}
+          class="inline-flex h-10 items-center px-2 futura text-xs uppercase tracking-[0.18em] text-slate-600 transition hover:text-[#FF4081]"
+          aria-label={copy.switchLanguageAria}
+        >
+          {copy.switchLanguage}
+        </a>
+        <button
+          id="mobile-menu-button"
+          type="button"
+          class="inline-flex flex-col items-center justify-center gap-1.5 w-12 h-12 shrink-0 rounded-full border border-slate-300 bg-white shadow-md shadow-slate-300/60 ring-2 ring-white/70 active:scale-[0.97] transition"
+          aria-label={copy.openNavigation}
+          aria-expanded="false"
+        >
+          <span class="block h-0.5 w-6 bg-slate-800"></span>
+          <span class="block h-0.5 w-6 bg-slate-800"></span>
+          <span class="block h-0.5 w-6 bg-slate-800"></span>
+        </button>
+      </div>
     </header>
 
     <aside class="hidden w-full px-6 py-6 lg:w-72 xl:w-80 lg:px-8 lg:py-10 lg:h-screen lg:fixed lg:top-0 lg:left-0 lg:flex lg:flex-col lg:overflow-y-auto lg:bg-[#ECEFF1] lg:z-10">
       <div class="flex flex-wrap items-center justify-between gap-4">
         <h1 class="text-2xl font-bold tussilago lg:text-3xl">
-          <a href="/">mikio815.dev</a>
+          <a href={locale === "en" ? "/en/" : "/"}>mikio815.dev</a>
         </h1>
         <SocialLinks class="w-full justify-start lg:hidden" />
       </div>
       <nav class="mt-8 flex flex-col gap-12 text-black flex-1" aria-label="Primary">
-        <div class="flex items-stretch gap-4">
-          <span class="writing-vertical-lr text-sm font-normal futura lg:text-base text-black leading-none">Profile</span>
-          <span class="block self-stretch w-[1.5px] h-full bg-slate-800/70"></span>
-          <ul class="space-y-3 text-lg font-medium futura lg:text-2xl lg:space-y-5">
-            <li>
-              <a href="/profile" class="text-black transition-colors duration-200">About</a>
-            </li>
-            <li>
-              <a href="/profile#career" class="text-black transition-colors duration-200">Career</a>
-            </li>
-            <li>
-              <a href="/blog" class="text-black transition-colors duration-200">Blog</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="flex items-stretch gap-4">
-          <span class="writing-vertical-lr text-sm font-normal futura lg:text-base text-black leading-none">Tech</span>
-          <span class="block self-stretch w-[1.5px] h-full bg-slate-800/70"></span>
-          <ul class="space-y-3 text-lg font-medium futura lg:text-2xl lg:space-y-5">
-            <li>
-              <a href="/skills" class="text-black transition-colors duration-200">Skills</a>
-            </li>
-            <li>
-              <a href="/works" class="text-black transition-colors duration-200">Works</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="flex items-stretch gap-4">
-          <span class="writing-vertical-lr text-sm font-normal futura lg:text-base text-black leading-none">Contact</span>
-          <span class="block self-stretch w-[1.5px] h-full bg-slate-800/70"></span>
-          <ul class="space-y-3 text-lg font-medium futura lg:text-2xl lg:space-y-5">
-            <li>
-              <a href="/social" class="text-black transition-colors duration-200">Social</a>
-            </li>
-            <li>
-              <a href="/contact" class="text-black transition-colors duration-200">Contact</a>
-            </li>
-          </ul>
-        </div>
+        {navGroups.map((group) => (
+          <div class="flex items-stretch gap-4">
+            <span class="writing-vertical-lr text-sm font-normal futura lg:text-base text-black leading-none">{group.label}</span>
+            <span class="block self-stretch w-[1.5px] h-full bg-slate-800/70"></span>
+            <ul class="space-y-3 text-lg font-medium futura lg:text-2xl lg:space-y-5">
+              {group.items.map((item) => (
+                <li>
+                  <a href={item.href} class="text-black transition-colors duration-200">{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </nav>
-      <SocialLinks class="hidden lg:flex mt-10 lg:mt-auto" />
+      <div class="hidden lg:flex mt-10 lg:mt-auto flex-col items-start gap-4">
+        <a
+          href={alternatePath}
+          class="futura text-xs uppercase tracking-[0.18em] text-slate-500 transition hover:text-[#FF4081]"
+          aria-label={copy.switchLanguageAria}
+        >
+          {copy.switchLanguage}
+        </a>
+        <SocialLinks />
+      </div>
     </aside>
     <div aria-hidden="true" class="hidden lg:block lg:w-72 xl:w-80 flex-shrink-0"></div>
     <main class="flex-1 w-full px-6 py-10 lg:px-10 lg:py-14">
@@ -125,7 +137,7 @@ const resolvedOgImage = (() => {
     </main>
   </div>
 
-  <MobileMenu />
+  <MobileMenu locale={locale} alternatePath={alternatePath} />
 
   <script is:inline>
     const btn = document.getElementById("mobile-menu-button");

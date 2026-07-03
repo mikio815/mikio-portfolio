@@ -1,0 +1,33 @@
+---
+import DefaultLayout from "../../layouts/DefaultLayout.astro"
+import { Icon } from "astro-icon/components"
+---
+
+<DefaultLayout
+	title="Contact"
+	description="Contact information for mikio815"
+>
+	<section class="mt-12 space-y-12 text-slate-900">
+		<h2 class="text-6xl font-bold tussilago">Contact</h2>
+		<ul class="max-w-xl divide-y divide-slate-300 border-y border-slate-300">
+			<li>
+				<a
+					href="mailto:contact@mikio815.dev"
+					class="group flex items-center gap-4 py-5 transition hover:text-[#FF4081]"
+				>
+					<Icon name="mdi:email-outline" class="text-2xl" />
+					<span class="futura text-xl">contact@mikio815.dev</span>
+				</a>
+			</li>
+			<li>
+				<a
+					href="/en/social"
+					class="group flex items-center gap-4 py-5 transition hover:text-[#FF4081]"
+				>
+					<Icon name="mdi:share-variant" class="text-2xl" />
+					<span class="futura text-xl">Other channels. Twitter DMs are open.</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+</DefaultLayout>

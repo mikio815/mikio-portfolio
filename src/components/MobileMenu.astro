@@ -1,5 +1,17 @@
 ---
 import SocialLinks from "./SocialLinks.astro"
+import {
+	getAlternateLocalePath,
+	getNavGroups,
+	normalizeLocale,
+	siteCopy,
+} from "../data/siteLocale"
+
+const locale = normalizeLocale(Astro.props.locale, Astro.url.pathname)
+const copy = siteCopy[locale]
+const navGroups = getNavGroups(locale)
+const alternatePath =
+	Astro.props.alternatePath ?? getAlternateLocalePath(Astro.url.pathname, locale)
 ---
 <div
   id="mobile-menu-overlay"
@@ -12,12 +24,12 @@ import SocialLinks from "./SocialLinks.astro"
     data-mobile-menu-panel
   >
     <div class="flex items-center justify-between">
-      <span class="text-xl font-bold tussilago">Menu</span>
+      <span class="text-xl font-bold tussilago">{copy.menu}</span>
       <button
         id="mobile-menu-close"
         type="button"
         class="relative flex h-12 w-12 items-center justify-center rounded-full hover:bg-slate-100 transition"
-        aria-label="Close navigation"
+        aria-label={copy.closeNavigation}
       >
         <span class="absolute block h-[2px] w-6 bg-slate-800 rotate-45"></span>
         <span class="absolute block h-[2px] w-6 bg-slate-800 -rotate-45"></span>
@@ -25,33 +37,26 @@ import SocialLinks from "./SocialLinks.astro"
     </div>
 
     <nav class="flex flex-col gap-12 text-slate-900 w-full max-w-[280px] mx-auto" aria-label="Mobile Primary">
-      <div class="grid w-full grid-cols-[100px_1fr] items-start gap-x-8">
-        <p class="col-span-1 text-right min-w-[100px] whitespace-nowrap text-sm font-semibold tracking-[0.24em] text-slate-700 uppercase futura leading-6">Profile</p>
-        <ul class="col-span-1 w-full space-y-4 text-[26px] font-normal futura leading-tight">
-          <li><a href="/profile" class="hover:text-[#FF4081] transition">About</a></li>
-          <li><a href="/profile#career" class="hover:text-[#FF4081] transition">Career</a></li>
-          <li><a href="/blog" class="hover:text-[#FF4081] transition">Blog</a></li>
-        </ul>
-      </div>
-
-      <div class="grid w-full grid-cols-[100px_1fr] items-start gap-x-8">
-        <p class="col-span-1 text-right min-w-[100px] whitespace-nowrap text-sm font-semibold tracking-[0.24em] text-slate-700 uppercase futura leading-6">Tech</p>
-        <ul class="col-span-1 w-full space-y-4 text-[26px] font-normal futura leading-tight">
-          <li><a href="/skills" class="hover:text-[#FF4081] transition">Skills</a></li>
-          <li><a href="/works" class="hover:text-[#FF4081] transition">Works</a></li>
-        </ul>
-      </div>
-
-      <div class="grid w-full grid-cols-[100px_1fr] items-start gap-x-8">
-        <p class="col-span-1 text-right min-w-[100px] whitespace-nowrap text-sm font-semibold tracking-[0.24em] text-slate-700 uppercase futura leading-6">Contact</p>
-        <ul class="col-span-1 w-full space-y-4 text-[26px] font-normal futura leading-tight">
-          <li><a href="/social" class="hover:text-[#FF4081] transition">Social</a></li>
-          <li><a href="/contact" class="hover:text-[#FF4081] transition">Contact</a></li>
-        </ul>
-      </div>
+      {navGroups.map((group) => (
+        <div class="grid w-full grid-cols-[100px_1fr] items-start gap-x-8">
+          <p class="col-span-1 text-right min-w-[100px] whitespace-nowrap text-sm font-semibold tracking-[0.24em] text-slate-700 uppercase futura leading-6">{group.label}</p>
+          <ul class="col-span-1 w-full space-y-4 text-[26px] font-normal futura leading-tight">
+            {group.items.map((item) => (
+              <li><a href={item.href} class="hover:text-[#FF4081] transition">{item.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </nav>
 
-    <div class="mt-auto">
+    <div class="mt-auto space-y-5">
+      <a
+        href={alternatePath}
+        class="inline-flex items-center py-2 futura text-sm uppercase tracking-[0.18em] text-slate-600 transition hover:text-[#FF4081]"
+        aria-label={copy.switchLanguageAria}
+      >
+        {copy.switchLanguage}
+      </a>
       <SocialLinks class="justify-start gap-4" />
     </div>
   </div>

@@ -1,10 +1,13 @@
 ---
 layout: ../../layouts/BlogLayout.astro
 title: '2025年を振り返る'
+titleEn: '2025 recap'
 pubDate: "2025-12-31"
 description: '振り返りと、抱負です'
+descriptionEn: 'Recap and goals.'
 author: 'mikio'
 tags: ["misc"]
+contentLocale: "ja"
 ---
 
 もうすぐ2025年も終わりますね。現在は12/31の23:21です。
