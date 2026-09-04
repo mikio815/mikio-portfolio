@@ -25,6 +25,9 @@ pnpm-debug.log*
 
 .vscode/
 
+# claude code local config
+.claude/
+
 src/pages/drafts/
 src/private/
 
