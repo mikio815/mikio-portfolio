@@ -1,0 +1,36 @@
+---
+interface Props {
+	locale?: "ja" | "en"
+}
+
+const { locale = "ja" } = Astro.props
+const title = locale === "en" ? "Mutual Links" : "相互リンク"
+---
+
+<section class="max-w-2xl space-y-5" aria-labelledby="mutual-links-heading">
+	<h3 id="mutual-links-heading" class="text-3xl font-bold tussilago">
+		{title}
+	</h3>
+	<a
+		href="https://mikio815.dev"
+		target="_blank"
+		rel="noreferrer noopener"
+		class="block w-fit transition-opacity hover:opacity-75"
+	>
+		<img
+			src="/link.png"
+			alt="mikio815.dev"
+			width="88"
+			height="31"
+			class="block h-[31px] w-[88px]"
+		/>
+	</a>
+	<p class="text-sm text-slate-600">
+		<a
+			href="https://mikio815.dev"
+			class="break-all transition hover:text-[#FF4081]"
+		>
+			https://mikio815.dev
+		</a>
+	</p>
+</section>
