@@ -7,6 +7,7 @@ import {
 	getNavGroups,
 	normalizeLocale,
 	siteCopy,
+	stripLocalePrefix,
 } from "../data/siteLocale"
 
 const SITE = {
@@ -41,6 +42,20 @@ const resolvedOgImage = (() => {
 		? ogImage
 		: new URL(ogImage, SITE.baseUrl).toString()
 })()
+const currentBasePath = stripLocalePrefix(Astro.url.pathname)
+const isNavItemActive = (href: string) => {
+	// ハッシュ付きリンク(同一ページ内アンカー)は現在地表示しない
+	if (href.includes("#")) {
+		return false
+	}
+	const itemBase = stripLocalePrefix(href)
+	if (itemBase === "/") {
+		return currentBasePath === "/"
+	}
+	return (
+		currentBasePath === itemBase || currentBasePath.startsWith(`${itemBase}/`)
+	)
+}
 ---
 <html lang={selfHrefLang}>
 <head>
@@ -113,7 +128,15 @@ const resolvedOgImage = (() => {
             <ul class="space-y-3 text-lg font-medium futura lg:text-2xl lg:space-y-5">
               {group.items.map((item) => (
                 <li>
-                  <a href={item.href} class="text-black transition-colors duration-200">{item.label}</a>
+                  <a
+                    href={item.href}
+                    class:list={[
+                      "transition-colors duration-200",
+                      isNavItemActive(item.href) ? "text-[#FF4081]" : "text-black",
+                    ]}
+                  >
+                    {item.label}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -133,7 +156,9 @@ const resolvedOgImage = (() => {
     </aside>
     <div aria-hidden="true" class="hidden lg:block lg:w-72 xl:w-80 flex-shrink-0"></div>
     <main class="flex-1 w-full px-6 py-10 lg:px-10 lg:py-14">
-      <slot />
+      <div class="animate-fade-up">
+        <slot />
+      </div>
     </main>
   </div>
 

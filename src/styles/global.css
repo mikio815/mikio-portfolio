@@ -14,6 +14,16 @@ body {
   font-feature-settings: "palt";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #ECEFF1;
+  background-image:
+    radial-gradient(1100px 550px at 100% -10%, rgba(255, 64, 129, 0.09), transparent 65%),
+    radial-gradient(rgba(15, 23, 42, 0.055) 1px, transparent 1px);
+  background-size: auto, 26px 26px;
+  background-attachment: fixed;
+}
+
+::selection {
+  background: rgba(255, 64, 129, 0.22);
 }
 
 .writing-vertical-lr {
@@ -43,6 +53,33 @@ nav a:hover {
 
 .fade-in {
   animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.anim-delay-1 { animation-delay: 0.08s; }
+.anim-delay-2 { animation-delay: 0.16s; }
+.anim-delay-3 { animation-delay: 0.24s; }
+.anim-delay-4 { animation-delay: 0.32s; }
+.anim-delay-5 { animation-delay: 0.4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up {
+    animation: none;
+  }
 }
 
 .futura {

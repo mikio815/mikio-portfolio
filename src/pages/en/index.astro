@@ -6,8 +6,27 @@ import DefaultLayout from "../../layouts/DefaultLayout.astro"
 	description="Portfolio of mikio815"
 >
 	<section class="text-slate-900">
-		<div class="max-w-3xl space-y-6">
-			<h1 class="text-5xl sm:text-6xl font-bold tussilago leading-tight">mikio815</h1>
+		<div class="mt-10 lg:mt-20">
+			<h1 class="animate-fade-up text-7xl sm:text-8xl lg:text-9xl font-bold tussilago leading-none">
+				mikio815
+			</h1>
+			<p class="animate-fade-up anim-delay-1 mt-10 max-w-xl text-lg sm:text-xl font-light leading-relaxed text-slate-600">
+				CTF(pwn), Linux kernel, Confidential Computing, ...and more!
+			</p>
+			<div class="animate-fade-up anim-delay-2 mt-14 flex flex-wrap gap-x-10 gap-y-4 futura text-sm uppercase tracking-[0.25em]">
+				<a href="/en/profile" class="group inline-flex items-center gap-2 text-slate-900">
+					About
+					<span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+				</a>
+				<a href="/en/works" class="group inline-flex items-center gap-2 text-slate-900">
+					Works
+					<span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+				</a>
+				<a href="/en/blog" class="group inline-flex items-center gap-2 text-slate-900">
+					Blog
+					<span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+				</a>
+			</div>
 		</div>
 	</section>
 </DefaultLayout>
